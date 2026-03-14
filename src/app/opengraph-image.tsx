@@ -6,31 +6,7 @@ export const alt = "MJ Concierge Services - Cleaning, Private Chauffeurs & Photo
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function OGImage(request: Request) {
-  let baseUrl: string = company.url;
-  try {
-    const reqUrl = new URL(request.url);
-    if (reqUrl.origin?.startsWith("http")) baseUrl = reqUrl.origin;
-  } catch {
-    // fallback to company.url
-  }
-  const bgImageUrl = `${baseUrl}/images/cherrr3.JPG`;
-
-  let bgImageSrc: string;
-  try {
-    const res = await fetch(bgImageUrl);
-    if (!res.ok) throw new Error("Fetch failed");
-    const buffer = await res.arrayBuffer();
-    const bytes = new Uint8Array(buffer);
-    let binary = "";
-    for (let i = 0; i < bytes.byteLength; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    bgImageSrc = `data:image/jpeg;base64,${btoa(binary)}`;
-  } catch {
-    bgImageSrc = "";
-  }
-
+export default async function OGImage() {
   return new ImageResponse(
     (
       <div
@@ -45,36 +21,18 @@ export default async function OGImage(request: Request) {
           fontFamily: "Georgia, serif",
         }}
       >
-        {/* Background: cherrr3.JPG */}
-        {bgImageSrc ? (
-          <img
-            src={bgImageSrc}
-            alt=""
-            width={1200}
-            height={630}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 0,
-            }}
-          />
-        ) : (
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              background: "linear-gradient(135deg, #2F3439 0%, #1E2328 100%)",
-              zIndex: 0,
-            }}
-          />
-        )}
+        {/* Background: cinematic gradient (no fetch = always works) */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(135deg, #1a1f26 0%, #2a3038 40%, #1e2328 100%)",
+            zIndex: 0,
+          }}
+        />
 
         {/* Dark overlay for contrast */}
         <div
