@@ -9,7 +9,8 @@ export const contentType = "image/png";
 export default async function OGImage(request: Request) {
   let baseUrl: string = company.url;
   try {
-    if (request.url) baseUrl = new URL(request.url).origin;
+    const reqUrl = new URL(request.url);
+    if (reqUrl.origin?.startsWith("http")) baseUrl = reqUrl.origin;
   } catch {
     // fallback to company.url
   }
@@ -17,7 +18,9 @@ export default async function OGImage(request: Request) {
 
   let bgImageSrc: string;
   try {
-    const buffer = await fetch(bgImageUrl).then((res) => res.arrayBuffer());
+    const res = await fetch(bgImageUrl);
+    if (!res.ok) throw new Error("Fetch failed");
+    const buffer = await res.arrayBuffer();
     const bytes = new Uint8Array(buffer);
     let binary = "";
     for (let i = 0; i < bytes.byteLength; i++) {
@@ -100,16 +103,17 @@ export default async function OGImage(request: Request) {
         >
           <div
             style={{
-              width: 680,
-              height: 390,
-              background: "#FFFFFF",
+              width: 700,
+              height: 400,
+              background: "#F7F4EE",
               borderRadius: 20,
               display: "flex",
+              border: "2px solid rgba(143,190,142,0.5)",
               boxShadow:
-                "0 30px 90px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08), 12px 24px 70px rgba(0,0,0,0.4)",
+                "0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.08), 0 0 60px rgba(143,190,142,0.15)",
               overflow: "hidden",
               position: "relative",
-              transform: "rotate(-5deg)",
+              transform: "rotate(-4deg)",
               transformOrigin: "center center",
             }}
           >
