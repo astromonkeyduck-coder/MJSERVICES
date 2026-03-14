@@ -5,6 +5,7 @@ export const runtime = "edge";
 export const alt = "MJ Concierge Services - Cleaning, Private Chauffeurs & Photography in Orlando, FL";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const dynamic = "force-dynamic";
 
 export default async function OGImage() {
   return new ImageResponse(
@@ -71,8 +72,6 @@ export default async function OGImage() {
                 "0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.08), 0 0 60px rgba(143,190,142,0.15)",
               overflow: "hidden",
               position: "relative",
-              transform: "rotate(-4deg)",
-              transformOrigin: "center center",
             }}
           >
             {/* Left: contact info */}
