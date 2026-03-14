@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { services } from "@/content/site-data";
 import { MonogramSeal } from "./MonogramSeal";
+import { playSuccess, playError } from "@/lib/sounds";
 
 type FormStatus = "idle" | "sending" | "sent" | "error";
 
@@ -32,11 +33,14 @@ export function CardBack({ isFlipped }: { isFlipped?: boolean }) {
       });
       if (res.ok) {
         setStatus("sent");
+        playSuccess();
       } else {
         setStatus("error");
+        playError();
       }
     } catch {
       setStatus("error");
+      playError();
     }
   }
 
@@ -46,7 +50,7 @@ export function CardBack({ isFlipped }: { isFlipped?: boolean }) {
   return (
     <div
       className={`absolute inset-0 backface-hidden bg-charcoal-deep rounded-xl overflow-hidden flex flex-col text-left ${isFlipped ? "" : "pointer-events-none"}`}
-      style={{ transform: "rotateY(180deg)" }}
+      style={{ transform: "rotateY(180deg) translateZ(0)" }}
     >
       {/* Image strip header */}
       <div className="relative h-[52px] shrink-0 overflow-hidden">

@@ -107,16 +107,21 @@
   font-family: var(--font-cormorant), Georgia, serif;
 }
 
+.font-quote {
+  font-family: var(--font-great-vibes), "Brush Script MT", cursive;
+}
+
 .safe-area-bottom {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 .card-shadow {
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 10px 40px rgba(0, 0, 0, 0.3),
-    0 25px 70px rgba(0, 0, 0, 0.25),
-    0 0 80px rgba(143, 190, 142, 0.04);
+    0 6px 24px rgba(0, 0, 0, 0.45),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 40px 120px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 0, 0, 0.15),
+    0 0 120px rgba(143, 190, 142, 0.08);
 }
 
 .card-shadow-hover {

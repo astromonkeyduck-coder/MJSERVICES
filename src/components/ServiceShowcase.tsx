@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { services } from "@/content/site-data";
 import { useImageRotation, CrossfadeImage } from "./RotatingImage";
+import { playHover, playClick } from "@/lib/sounds";
 
 export function ServiceShowcase() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -34,7 +35,8 @@ export function ServiceShowcase() {
           {services.map((s, i) => (
             <button
               key={s.id}
-              onClick={() => setActiveIdx(i)}
+              onClick={() => { playClick(); setActiveIdx(i); }}
+              onMouseEnter={playHover}
               className={`relative pb-3 px-4 md:px-6 text-sm md:text-base tracking-wide transition-colors ${
                 i === activeIdx
                   ? "text-paper font-medium"

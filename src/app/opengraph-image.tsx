@@ -7,9 +7,13 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage(request: Request) {
-  const url = new URL(request.url);
-  const baseUrl = url.origin;
-  const bgImageUrl = `${baseUrl}/images/cherrrrrr2.jpg`;
+  let baseUrl: string = company.url;
+  try {
+    if (request.url) baseUrl = new URL(request.url).origin;
+  } catch {
+    // fallback to company.url
+  }
+  const bgImageUrl = `${baseUrl}/images/cherrr3.JPG`;
 
   let bgImageSrc: string;
   try {
@@ -38,7 +42,7 @@ export default async function OGImage(request: Request) {
           fontFamily: "Georgia, serif",
         }}
       >
-        {/* Background: cherrrrrr2.jpg */}
+        {/* Background: cherrr3.JPG */}
         {bgImageSrc ? (
           <img
             src={bgImageSrc}
@@ -47,18 +51,24 @@ export default async function OGImage(request: Request) {
             height={630}
             style={{
               position: "absolute",
-              inset: 0,
+              top: 0,
+              left: 0,
               width: "100%",
               height: "100%",
               objectFit: "cover",
+              zIndex: 0,
             }}
           />
         ) : (
           <div
             style={{
               position: "absolute",
-              inset: 0,
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
               background: "linear-gradient(135deg, #2F3439 0%, #1E2328 100%)",
+              zIndex: 0,
             }}
           />
         )}
@@ -67,17 +77,25 @@ export default async function OGImage(request: Request) {
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
             background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%)",
+            zIndex: 1,
           }}
         />
 
         {/* 3D-style Business card overlay (tilted, floating) */}
         <div
           style={{
+            position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            width: "100%",
+            height: "100%",
+            zIndex: 10,
           }}
         >
           <div

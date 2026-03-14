@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { company } from "@/content/site-data";
 import { BusinessCard } from "./BusinessCard";
+import { AudioVisualizer } from "./audio/AudioVisualizer";
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -28,7 +29,7 @@ export function Hero() {
       {/* Cinematic background image */}
       <div className="absolute inset-0" aria-hidden="true">
         <Image
-          src="/images/cherrrrrr2.jpg"
+          src="/images/cherrr3.JPG"
           alt=""
           fill
           priority
@@ -36,9 +37,7 @@ export function Hero() {
           sizes="100vw"
           quality={85}
         />
-        {/* Heavy dark overlay for text legibility + mood */}
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/70 to-navy" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/60 via-transparent to-navy/40" />
+        {/* No overlay — full image visibility */}
       </div>
 
       <motion.div
@@ -52,14 +51,14 @@ export function Hero() {
           variants={fade}
           className="flex flex-col items-center text-center gap-5"
         >
-          <div>
-            <p className="text-sage text-[11px] sm:text-xs tracking-[0.3em] uppercase font-medium mb-3">
+          <div className="rounded-2xl px-6 py-5 bg-black/20 backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.08)]">
+            <p className="text-sage text-[11px] sm:text-xs tracking-[0.3em] uppercase font-medium mb-3 [text-shadow:0_2px_4px_rgba(0,0,0,0.7),0_0_20px_rgba(0,0,0,0.5)]">
               Orlando, Florida
             </p>
-            <h1 className="font-accent text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-paper leading-[1.1] tracking-tight">
+            <h1 className="font-accent italic text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-paper leading-[1.1] tracking-tight [text-shadow:0_3px_6px_rgba(0,0,0,0.7),0_0_24px_rgba(0,0,0,0.5)]">
               {company.slogan}
             </h1>
-            <p className="text-line/60 text-sm sm:text-base mt-3 max-w-md mx-auto">
+            <p className="text-line/60 text-sm sm:text-base mt-3 max-w-md mx-auto [text-shadow:0_2px_4px_rgba(0,0,0,0.7),0_0_16px_rgba(0,0,0,0.5)]">
               {company.description}
             </p>
           </div>
@@ -67,7 +66,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <a
               href={`tel:${company.contact.phone1Raw}`}
-              className="px-7 py-3 bg-sage text-charcoal-deep text-sm font-medium tracking-wide rounded-full hover:bg-sage-light transition-colors focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+              className="px-7 py-3 bg-sage text-charcoal-deep text-sm font-medium tracking-wide rounded-full hover:bg-sage-light transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.5),0_2px_8px_rgba(0,0,0,0.4)] focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
             >
               Call Now
             </a>
@@ -77,7 +76,7 @@ export function Hero() {
                 if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
                 setTimeout(() => window.dispatchEvent(new CustomEvent("flipCardToBack")), 400);
               }}
-              className="px-6 py-2.5 border border-paper/20 text-paper text-sm tracking-wide rounded-lg hover:border-sage/50 hover:text-sage-light transition-colors focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+              className="px-6 py-2.5 bg-black/30 border border-paper/30 text-paper text-sm tracking-wide rounded-lg hover:border-sage/50 hover:text-sage-light transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.5),0_2px_8px_rgba(0,0,0,0.4)] focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
             >
               Contact Us
             </button>
@@ -90,9 +89,12 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
+      {/* Audio-reactive visualizer waves */}
+      <AudioVisualizer />
+
       {/* Bottom fade into next section */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-navy to-transparent pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-navy to-transparent pointer-events-none z-[2]"
         aria-hidden="true"
       />
     </section>

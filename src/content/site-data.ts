@@ -50,9 +50,9 @@ export const services = [
       "Professional drivers, punctual pickups, and comfortable rides for any occasion.",
     cta: "Book a Chauffeur",
     images: {
-      main: "/images/cherrrrrr2.jpg",
+      main: "/images/cherrr3.JPG",
       secondary: "/images/gettingoutofcar.jpg",
-      gallery: ["/images/cherrrrrr2.jpg", "/images/gettingoutofcar.jpg", "/images/chauffer.jpg"],
+      gallery: ["/images/cherrr3.JPG", "/images/gettingoutofcar.jpg", "/images/chauffer.jpg"],
     },
   },
   {

@@ -3,7 +3,7 @@ import { MonogramSeal } from "./MonogramSeal";
 
 export function CardFront({ isFlipped }: { isFlipped?: boolean }) {
   return (
-    <div className={`absolute inset-0 backface-hidden bg-paper rounded-xl overflow-hidden flex text-left ${isFlipped ? "pointer-events-none" : ""}`}>
+    <div className={`absolute inset-0 backface-hidden bg-paper rounded-xl overflow-hidden flex text-left ${isFlipped ? "pointer-events-none" : ""}`} style={{ transform: "translateZ(0)" }}>
       {/* Contact info */}
       <div className="flex-1 pt-3 pl-3 pr-3 pb-4 sm:pt-4 sm:pl-4 sm:pr-5 sm:pb-5 flex flex-col justify-between relative z-10">
         <div>

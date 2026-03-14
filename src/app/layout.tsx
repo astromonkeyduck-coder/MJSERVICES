@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Serif_Display, Cormorant_Garamond } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Cormorant_Garamond, Great_Vibes } from "next/font/google";
 import { seo, company } from "@/content/site-data";
 import "./globals.css";
 
@@ -21,6 +21,13 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "600"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const greatVibes = Great_Vibes({
+  variable: "--font-great-vibes",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -58,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${dmSerif.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${dmSerif.variable} ${cormorant.variable} ${greatVibes.variable}`}>
       <body className="antialiased">
         {children}
         <script

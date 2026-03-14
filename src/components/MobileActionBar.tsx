@@ -1,6 +1,7 @@
 "use client";
 
 import { company } from "@/content/site-data";
+import { playHover } from "@/lib/sounds";
 
 export function MobileActionBar() {
   return (
@@ -9,6 +10,7 @@ export function MobileActionBar() {
         <a
           href={`tel:${company.contact.phone1Raw}`}
           className="flex-1 flex items-center justify-center gap-1.5 py-3 text-charcoal-deep bg-sage text-xs font-medium tracking-wide"
+          onMouseEnter={playHover}
         >
           <PhoneIcon />
           Call
@@ -16,12 +18,14 @@ export function MobileActionBar() {
         <a
           href="#services"
           className="flex-1 flex items-center justify-center gap-1.5 py-3 text-line/70 text-xs tracking-wide border-x border-sage/10"
+          onMouseEnter={playHover}
         >
           Services
         </a>
         <a
           href={`mailto:${company.contact.email}`}
           className="flex-1 flex items-center justify-center gap-1.5 py-3 text-line/70 text-xs tracking-wide"
+          onMouseEnter={playHover}
         >
           <MailIcon />
           Email

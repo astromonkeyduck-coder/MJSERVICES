@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { company, navigation } from "@/content/site-data";
 import { MonogramSeal } from "./MonogramSeal";
+import { playHover, playClick } from "@/lib/sounds";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +36,7 @@ export function Header() {
       <div className="section-padding flex items-center justify-between h-14 md:h-16 max-w-[1200px] mx-auto">
         <a href="#" className="flex items-center gap-2.5" aria-label="MJ Concierge Services home">
           <MonogramSeal size={32} variant="light" />
-          <span className="hidden sm:block font-serif text-paper text-base tracking-tight">
+          <span className="font-serif text-paper text-sm sm:text-base tracking-tight">
             {company.name}
           </span>
         </a>
@@ -46,6 +47,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className="text-sm text-line/60 hover:text-paper transition-colors"
+              onMouseEnter={playHover}
             >
               {item.label}
             </a>
@@ -53,6 +55,7 @@ export function Header() {
           <a
             href={`tel:${company.contact.phone1Raw}`}
             className="ml-1 px-5 py-2 bg-sage text-charcoal-deep text-sm font-medium rounded-full hover:bg-sage-light transition-colors"
+            onMouseEnter={playHover}
           >
             Call Now
           </a>
@@ -60,7 +63,7 @@ export function Header() {
 
         <button
           className="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={() => { playClick(); setMobileOpen(!mobileOpen); }}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
         >

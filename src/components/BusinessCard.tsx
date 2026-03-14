@@ -4,6 +4,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { CardFront } from "./CardFront";
 import { CardBack } from "./CardBack";
+import { playFlip } from "@/lib/sounds";
 
 const CARD_WIDTH = "min(580px, 90vw)";
 const FRONT_HEIGHT = 331;
@@ -42,6 +43,7 @@ export function BusinessCard() {
   const flipCard = useCallback(() => {
     mouseX.set(0);
     mouseY.set(0);
+    playFlip();
     setIsFlipped((prev) => !prev);
   }, [mouseX, mouseY]);
 
@@ -136,7 +138,7 @@ export function BusinessCard() {
           </motion.div>
         </motion.div>
 
-        <p className="text-center text-[10px] text-paper/20 mt-3 tracking-widest uppercase md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+        <p className="text-center text-[10px] text-paper/70 mt-3 tracking-widest uppercase [text-shadow:0_2px_4px_rgba(0,0,0,0.7),0_0_12px_rgba(0,0,0,0.5)] md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
           {isFlipped ? "Tap card edge to flip back" : "Tap to flip"}
         </p>
       </motion.div>
