@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     fetch("https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86GnM.ttf").then((r) => r.arrayBuffer()),
   ]);
 
-  return new ImageResponse(
+  const response = new ImageResponse(
     (
       <div
         style={{
@@ -259,4 +259,6 @@ export async function GET(request: Request) {
       ],
     }
   );
+  response.headers.set("Cache-Control", "public, max-age=3600, s-maxage=3600, stale-while-revalidate");
+  return response;
 }

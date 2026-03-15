@@ -31,10 +31,16 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
+// Use deployment URL so og:image matches the shared link (fixes social previews on beta/preview URLs)
+const baseUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+  company.url;
+
 export const metadata: Metadata = {
   title: seo.title,
   description: seo.description,
-  metadataBase: new URL(company.url),
+  metadataBase: new URL(baseUrl),
   openGraph: {
     title: seo.title,
     description: seo.description,
