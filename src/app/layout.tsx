@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { DM_Sans, DM_Serif_Display, Cormorant_Garamond, Great_Vibes } from "next/font/google";
 import { seo, company } from "@/content/site-data";
 import "./globals.css";
@@ -31,41 +32,43 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
-// Use deployment URL so og:image matches the shared link (fixes social previews on beta/preview URLs)
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-  company.url;
+// Dynamic metadata: use request host so og:image matches the URL being shared (mjservices-beta.vercel.app, etc.)
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const host = headersList.get("host") || headersList.get("x-forwarded-host");
+  const proto = headersList.get("x-forwarded-proto") || "https";
+  const baseUrl = host ? `${proto}://${host}` : company.url;
 
-export const metadata: Metadata = {
-  title: seo.title,
-  description: seo.description,
-  metadataBase: new URL(baseUrl),
-  openGraph: {
+  return {
     title: seo.title,
     description: seo.description,
-    url: company.url,
-    siteName: company.name,
-    locale: "en_US",
-    type: "website",
-    images: [{ url: "/api/og?v=4", width: 1200, height: 630, alt: seo.title }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: seo.title,
-    description: seo.description,
-    images: ["/api/og?v=4"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  other: {
-    "theme-color": "#161B22",
-    "geo.region": "US-FL",
-    "geo.placename": company.location.city,
-  },
-};
+    metadataBase: new URL(baseUrl),
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url: baseUrl,
+      siteName: company.name,
+      locale: "en_US",
+      type: "website",
+      images: [{ url: "/api/og?v=4", width: 1200, height: 630, alt: seo.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+      images: ["/api/og?v=4"],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    other: {
+      "theme-color": "#161B22",
+      "geo.region": "US-FL",
+      "geo.placename": company.location.city,
+    },
+  };
+}
 
 export default function RootLayout({
   children,
